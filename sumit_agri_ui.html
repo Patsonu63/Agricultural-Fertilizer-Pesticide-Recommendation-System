@@ -1,0 +1,553 @@
+<html>
+<head>
+  <style>
+    body {
+      font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+      background-color: #f0f2f6;
+    }
+    
+    .stApp {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    
+    header {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e6e6e6;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .title {
+      color: #0e1117;
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0 0 5px 0;
+    }
+    
+    .subtitle {
+      color: #31333F;
+      font-size: 14px;
+      margin: 0 0 20px 0;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid #e6e6e6;
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-weight: 600;
+      color: #616161;
+    }
+    
+    .tab.active {
+      color: #ff4b4b;
+      border-bottom: 2px solid #ff4b4b;
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background-color: white;
+      border-radius: 4px;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #31333F;
+    }
+    
+    select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      font-family: inherit;
+    }
+    
+    select {
+      height: 42px;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    
+    .slider {
+      width: 100%;
+      margin: 10px 0;
+    }
+    
+    button {
+      background-color: #ff4b4b;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+      background-color: #e03e3e;
+    }
+    
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+    
+    .recommendation-section {
+      margin-top: 20px;
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 4px;
+      border-left: 4px solid #ff4b4b;
+    }
+    
+    .recommendation-section h3 {
+      margin-top: 0;
+      color: #31333F;
+    }
+    
+    .details-section {
+      margin-top: 15px;
+      border: 1px solid #e6e6e6;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .details-header {
+      background-color: #f1f3f4;
+      padding: 10px 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .details-content {
+      padding: 15px;
+      border-top: 1px solid #e6e6e6;
+    }
+    
+    .detail-item {
+      margin-bottom: 10px;
+    }
+    
+    .detail-item-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .detail-item-list li {
+      margin-bottom: 5px;
+    }
+    
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e6e6e6;
+      text-align: center;
+      font-size: 14px;
+      color: #616161;
+    }
+    
+    .crop-image {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 4px;
+      margin-bottom: 15px;
+    }
+    
+    .pest-card {
+      display: flex;
+      background-color: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .pest-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      margin-right: 15px;
+      background-color: #f1f3f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    .pest-info {
+      flex: 1;
+    }
+    
+    .pest-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="stApp">
+    <header>
+      <div>
+        <h1 class="title">🌾 Sumit Pvt Ltd - Agricultural Recommendation System</h1>
+        <p class="subtitle">Welcome to the intelligent agricultural recommendation system powered by LangChain and LangGraph. This system helps you optimize your crop management with personalized recommendations for fertilizers and pesticides.</p>
+      </div>
+    </header>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('tab1')">Soil & Crop Info</div>
+      <div class="tab" onclick="switchTab('tab2')">Pest Management</div>
+      <div class="tab" onclick="switchTab('tab3')">Recommendations</div>
+    </div>
+    
+    <div id="tab1" class="tab-content active">
+      <h2>Soil & Crop Information</h2>
+      
+      <div class="form-group">
+        <label for="crop-type">Select Crop Type</label>
+        <select id="crop-type">
+          <option value="rice">Rice</option>
+          <option value="wheat">Wheat</option>
+          <option value="cotton">Cotton</option>
+          <option value="sugarcane">Sugarcane</option>
+          <option value="maize">Maize</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="growth-stage">Select Growth Stage</label>
+        <div>
+          <input type="range" min="0" max="5" value="2" class="slider" id="growth-stage-slider">
+          <div id="growth-stage-value">Vegetative</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="soil-description">Describe your soil (color, texture, drainage, previous issues, etc.)</label>
+        <textarea id="soil-description" placeholder="Example: The soil is reddish-brown, slightly clayey with moderate drainage. It gets waterlogged after heavy rain and has shown signs of nutrient deficiency in previous seasons."></textarea>
+      </div>
+    </div>
+    
+    <div id="tab2" class="tab-content">
+      <h2>Pest Management</h2>
+      
+      <div class="form-group">
+        <label for="pest-description">Describe any pest issues you're experiencing (optional)</label>
+        <textarea id="pest-description" placeholder="Example: Small green insects on the underside of leaves causing yellowing and curling. Some leaves have small holes and the plant growth appears stunted."></textarea>
+      </div>
+      
+      <h3>Common Pests for Rice</h3>
+      
+      <div class="pest-cards">
+        <div class="pest-card">
+          <div class="pest-image">🐛</div>
+          <div class="pest-info">
+            <div class="pest-name">Stem Borer</div>
+            <div class="pest-desc">Causes dead heart in vegetative stage and white head in reproductive stage</div>
+          </div>
+        </div>
+        
+        <div class="pest-card">
+          <div class="pest-image">🦗</div>
+          <div class="pest-info">
+            <div class="pest-name">Leaf Folder</div>
+            <div class="pest-desc">Folds leaves and feeds inside, causing white streaks</div>
+          </div>
+        </div>
+        
+        <div class="pest-card">
+          <div class="pest-image">🐜</div>
+          <div class="pest-info">
+            <div class="pest-name">Brown Planthopper</div>
+            <div class="pest-desc">Causes hopper burn by sucking sap from the base</div>
+          </div>
+        </div>
+        
+        <div class="pest-card">
+          <div class="pest-image">🐞</div>
+          <div class="pest-info">
+            <div class="pest-name">Rice Hispa</div>
+            <div class="pest-desc">Scrapes green tissue between veins causing white patches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="tab3" class="tab-content">
+      <h2>Get Recommendations</h2>
+      
+      <button id="generate-btn">Generate Recommendations</button>
+      
+      <div id="results" style="display:block;">
+        <div class="success-message">Analysis complete!</div>
+        
+        <div class="recommendation-section">
+          <h3>📋 Comprehensive Recommendation</h3>
+          <div>
+            <p><strong>Crop Management Plan for Rice - Vegetative Stage</strong></p>
+            <p>Based on the soil analysis and crop requirements, we recommend the following comprehensive action plan for your rice crop:</p>
+            
+            <h4>1. Soil Treatment</h4>
+            <p>Your soil shows moderate acidity (pH 5.8) and needs calcium supplementation to improve structure. Apply:</p>
+            <ul>
+              <li>Dolomitic lime: 500 kg/ha to gradually increase pH and add calcium and magnesium</li>
+              <li>Organic matter: 2.5 tons/ha of well-decomposed compost to improve soil structure and water retention</li>
+            </ul>
+            
+            <h4>2. Fertilizer Application</h4>
+            <p><strong>Sumit Pvt Ltd's Premium Fertilizer Schedule:</strong></p>
+            <ul>
+              <li>Base application: <strong>Sumit DAP (18:46:0)</strong> at 100 kg/ha immediately</li>
+              <li>First top dressing: <strong>Sumit Urea (46-0-0)</strong> at 60 kg/ha at 20 days after transplanting</li>
+              <li>Second top dressing: <strong>Sumit Urea (46-0-0)</strong> at 60 kg/ha at panicle initiation stage</li>
+              <li>Micronutrient spray: <strong>Sumit Zinc Foliar</strong> at 2.5 kg/ha at 30 days after transplanting</li>
+            </ul>
+            
+            <h4>3. Pest Management</h4>
+            <p>For the current stem borer infestation (medium severity), apply:</p>
+            <ul>
+              <li><strong>Sumit Cartap 4G</strong> at 18 kg/ha, evenly broadcasting in standing water</li>
+              <li>Keep water level in the field at 2.5 cm for 72 hours after application</li>
+            </ul>
+            
+            <h4>4. Best Practices</h4>
+            <ul>
+              <li>Maintain water level of 2-3 cm during vegetative stage</li>
+              <li>Monitor for pests weekly, especially during morning hours</li>
+              <li>Ensure proper spacing between plants (20x15 cm) for optimum tillering</li>
+              <li>Remove weeds manually 30 days after transplanting</li>
+            </ul>
+            
+            <h4>5. Expected Outcomes</h4>
+            <ul>
+              <li>Improved tillering with 18-22 productive tillers per hill</li>
+              <li>Dark green foliage indicating proper nitrogen uptake</li>
+              <li>Resistance to lodging and improved drought tolerance</li>
+              <li>Potential yield increase of 15-20% over standard practices</li>
+            </ul>
+            
+            <p><strong>Follow-up:</strong> Please contact our Sumit Pvt Ltd agronomist for a field visit in 14 days to assess the effectiveness of these interventions and make any necessary adjustments.</p>
+          </div>
+        </div>
+        
+        <div class="details-section">
+          <div class="details-header" onclick="toggleDetails('soil-details')">
+            Soil Analysis Details <span>▼</span>
+          </div>
+          <div id="soil-details" class="details-content">
+            <div class="detail-item">
+              <div class="detail-item-title">Soil Type:</div>
+              <div>Sandy Clay Loam</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">pH Level:</div>
+              <div>5.8</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Nutrient Levels:</div>
+              <ul class="detail-item-list">
+                <li>Nitrogen: Low (120 kg/ha)</li>
+                <li>Phosphorus: Medium (25 kg/ha)</li>
+                <li>Potassium: Medium-high (180 kg/ha)</li>
+                <li>Zinc: Deficient (0.3 ppm)</li>
+              </ul>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Recommendations for Soil Improvement:</div>
+              <ul class="detail-item-list">
+                <li>Apply lime to increase pH gradually to 6.0-6.5</li>
+                <li>Add organic matter to improve soil structure</li>
+                <li>Address zinc deficiency through foliar application</li>
+                <li>Improve drainage in waterlogged areas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="details-section">
+          <div class="details-header" onclick="toggleDetails('pest-details')">
+            Pest Management Details <span>▼</span>
+          </div>
+          <div id="pest-details" class="details-content">
+            <div class="detail-item">
+              <div class="detail-item-title">Identified Pest:</div>
+              <div>Rice Stem Borer (Scirpophaga incertulas)</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Infestation Severity:</div>
+              <div>Medium</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Recommended Pesticides:</div>
+              <ul class="detail-item-list">
+                <li>Sumit Cartap hydrochloride 4G</li>
+                <li>Sumit Chlorantraniliprole 0.4% GR</li>
+                <li>Fipronil 0.3% GR</li>
+              </ul>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Application Method:</div>
+              <div>Broadcast granules evenly in standing water and maintain water level for 72 hours after application. Apply during early morning or late evening for best results.</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Safety Precautions:</div>
+              <ul class="detail-item-list">
+                <li>Wear protective clothing including gloves and mask during application</li>
+                <li>Wash hands thoroughly after handling pesticides</li>
+                <li>Keep pesticides away from children and food items</li>
+                <li>Do not graze livestock in treated fields for 7 days</li>
+                <li>Dispose of empty containers properly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="details-section">
+          <div class="details-header" onclick="toggleDetails('fertilizer-details')">
+            Fertilizer Recommendation Details <span>▼</span>
+          </div>
+          <div id="fertilizer-details" class="details-content">
+            <div class="detail-item">
+              <div class="detail-item-title">Crop:</div>
+              <div>Rice</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Growth Stage:</div>
+              <div>Vegetative</div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Recommended Fertilizers:</div>
+              <ul class="detail-item-list">
+                <li>UREA: 120 kg/ha in split applications</li>
+                <li>DAP: 100 kg/ha as basal application</li>
+                <li>POTASH: 40 kg/ha in split applications</li>
+                <li>ZINC SULFATE: 25 kg/ha as basal application</li>
+              </ul>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Application Schedule:</div>
+              <ul class="detail-item-list">
+                <li>Basal dose: Apply full dose of DAP and 50% of potash at the time of final land preparation</li>
+                <li>First top dressing: Apply 50% of urea at 20 days after transplanting</li>
+                <li>Second top dressing: Apply remaining 50% of urea and potash at panicle initiation stage</li>
+                <li>Zinc application: Apply zinc sulfate at transplanting or within 15 days after transplanting</li>
+              </ul>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-item-title">Expected Benefits:</div>
+              <ul class="detail-item-list">
+                <li>Enhanced tillering and vegetative growth from proper nitrogen application</li>
+                <li>Improved root development and early establishment from phosphorus</li>
+                <li>Increased disease resistance and stalk strength from potassium</li>
+                <li>Prevention of zinc deficiency symptoms like khaira disease</li>
+                <li>Overall yield increase of 15-20% compared to traditional practices</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>© 2025 Sumit Pvt Ltd. All rights reserved.</p>
+      <p>Powered by LangChain and LangGraph</p>
+    </footer>
+  </div>
+  
+  <script>
+    function switchTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Remove active class from all tab buttons
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Show the selected tab
+      document.getElementById(tabId).classList.add('active');
+      
+      // Add active class to the clicked tab button
+      event.currentTarget.classList.add('active');
+    }
+    
+    function toggleDetails(detailsId) {
+      const details = document.getElementById(detailsId);
+      if (details.style.display === 'none' || !details.style.display) {
+        details.style.display = 'block';
+        event.currentTarget.querySelector('span').textContent = '▼';
+      } else {
+        details.style.display = 'none';
+        event.currentTarget.querySelector('span').textContent = '▶';
+      }
+    }
+    
+    // Slider functionality
+    const slider = document.getElementById('growth-stage-slider');
+    const stageValue = document.getElementById('growth-stage-value');
+    const stages = ['Germination', 'Seedling', 'Vegetative', 'Flowering', 'Fruiting', 'Maturity'];
+    
+    slider.oninput = function() {
+      stageValue.textContent = stages[this.value];
+    }
+    
+    // Generate button functionality
+    document.getElementById('generate-btn').addEventListener('click', function() {
+      document.getElementById('results').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
